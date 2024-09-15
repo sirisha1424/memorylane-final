@@ -1,8 +1,45 @@
 import { Img, Button, TextArea, Input, Text, Heading } from "../../components";
 import UserProfile2 from "../../components/UserProfile2";
-import React from "react";
+import React, { useState } from "react";
 
 export default function HomepagestaticRowThirtysix() {
+  // State to manage form inputs
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Send data to the API
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    // Handle response
+    if (response.ok) {
+      alert('Message sent successfully');
+      setFormData({ name: '', email: '', message: '' }); // Reset form
+    } else {
+      alert('Error sending message');
+    }
+  };
+
   return (
     <div className="flex">
       <div className="container-xs flex md:px-5">
@@ -50,29 +87,36 @@ export default function HomepagestaticRowThirtysix() {
                     <Text size="text2xl" as="p" className="!font-playfairdisplay capitalize !text-pink-900_01">
                       Write to us
                     </Text>
-                    <div className="flex flex-col items-start gap-10 self-stretch">
+                    <form onSubmit={handleSubmit} className="flex flex-col items-start gap-10 self-stretch">
                       <div className="flex flex-col gap-5 self-stretch">
                         <div className="flex gap-10 md:flex-col">
                           <Input
                             type="text"
                             name="name"
-                            placeholder={`name`}
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="name"
                             className="flex h-[52px] w-full items-center justify-center rounded-[12px] border border-solid border-blue_gray-50 bg-gray-50_01 px-4 text-[14px] capitalize text-blue_gray-200 shadow-4xl"
                           />
                           <Input
                             type="email"
                             name="email"
-                            placeholder={`email`}
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="email"
                             className="flex h-[52px] w-full items-center justify-center rounded-[12px] border border-solid border-blue_gray-50 bg-gray-50_01 px-4 text-[14px] capitalize text-blue_gray-200 shadow-4xl"
                           />
                         </div>
                         <TextArea
-                          name="textbox"
-                          placeholder={`your message…`}
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="your message…"
                           className="h-[150px] rounded-[12px] border border-solid border-blue_gray-50 bg-gray-50_01 px-[18px] py-3.5 text-[14px] capitalize text-blue_gray-200 shadow-4xl"
                         />
                       </div>
                       <Button
+                        type="submit"
                         rightIcon={
                           <Img src="images/img_arrowright.svg" alt="Arrow Right" className="my-0.5 h-[16px] w-[16px]" />
                         }
@@ -80,7 +124,7 @@ export default function HomepagestaticRowThirtysix() {
                       >
                         send message
                       </Button>
-                    </div>
+                    </form>
                   </div>
                 </div>
                 <Img
