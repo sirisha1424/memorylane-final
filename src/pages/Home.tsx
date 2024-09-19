@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
-    // Redirect to /homepagestatic as soon as the component is mounted
-    navigate("/homepagestatic");
-  }, [navigate]);
+    // Redirect to /homepagestatic when the component is mounted
+    router.push("/homepagestatic");
+  }, [router]);
 
-  return null; // Since you're redirecting, there's no need to render anything
+  return null; // No need to render anything since you're redirecting
 };
 
 export default Home;

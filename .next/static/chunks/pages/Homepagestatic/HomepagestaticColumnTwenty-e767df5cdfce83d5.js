@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[141],{2909:function(n,_,e){(window.__NEXT_P=window.__NEXT_P||[]).push(["/Homepagestatic/HomepagestaticColumnTwenty",function(){return e(1101)}])}},function(n){n.O(0,[652,101,888,774,179],function(){return n(n.s=2909)}),_N_E=n.O()}]);
